@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 
 $user = "root";
@@ -20,7 +21,15 @@ if (isset($_POST["login"])) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result && password_verify($password, $result['mot_de_passe'])) {
+
+        $sql = "SELECT utilisateur_id FROM utilisateurs WHERE email = :email";
+        $stmt = $connect->prepare($sql);
+        $stmt->execute([':email' => $email]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
         $_SESSION['email'] = $email;
+        $_SESSION['usr_id'] = $result['utilisateur_id'];
+        
         header("location: ./dashboard.php");
         exit();
     } else {
