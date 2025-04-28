@@ -1,9 +1,16 @@
 <?php 
+    session_start();
     $user = "root";
     $pass = "";
     $db_db = "suivi_revisions";
     $host = "localhost";
     $code = "";
+
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION["id"];
+    } else {
+        header("location: ./dashboard.php");
+    }
 
     if (isset($_POST["singup"])) {
 
