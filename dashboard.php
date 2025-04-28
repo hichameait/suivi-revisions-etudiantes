@@ -6,6 +6,14 @@
     <title>DASHBOARD</title>
 </head>
 <body>
-    
+    <h1>Statistiques hebdomadaires</h1>
+    <p>Total d’heures de révision : </p>
+    <p>Moyenne des notes de compréhension : </p>
+
+    <ul>
+        <li><a href="./ajouter_revision.php">Ajouter Revision</a></li>
+        <li><a href="./ajouter_revision.php">List Revision</a></li>
+
+</ul>
 </body>
 </html>
