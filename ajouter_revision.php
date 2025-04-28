@@ -1,7 +1,5 @@
 <?php 
-
 session_start();
-
 
 $user = "root";
 $pass = "";
@@ -9,9 +7,9 @@ $db_db = "suivi_revisions";
 $host = "localhost";
 $error = "";
 
-if(isset($_SESSION['id'])) {
-    $user_is = $_SESSION["id"];
-}else{
+if (isset($_SESSION['id'])) {
+    $user_id = $_SESSION["id"];
+} else {
     header("location: ./connexion.php");
 }
 
@@ -20,22 +18,27 @@ if (isset($_POST["add"])) {
     $duree = $_POST["duree"];
     $note = $_POST["note"];
     $date = $_POST["date"];
-    
+
+    if (!is_numeric($note) || $note < 0 || $note > 10) {
+        die("Erreur : La note doit être un nombre entre 0 et 10.");
+    }
 
     $connect = new PDO("mysql:host=$host;dbname=$db_db", $user, $pass);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "INSERT INTO revisions (id, matiere, duree, note_comprehension, date_revision) VALUES (:matiere, :duree, :note, :date, :usr_id)";
+    $sql = "INSERT INTO revisions (matiere, duree, note_comprehension, date_revision, utilisateur_id) 
+            VALUES (:matiere, :duree, :note, :ldate, :usr_id)";
+
     $stmt = $connect->prepare($sql);
     $stmt->execute([
         ':matiere' => $matiere,
         ':duree'   => $duree,
         ':note'    => $note,
-        ':date'    => $date,
-        ':usr_id'  => $user_is
+        ':ldate'   => $date,
+        ':usr_id'  => $user_id
     ]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    header("Location: ./revisions.php"); 
+    exit();
 }
 ?>
 <!DOCTYPE html>
