@@ -14,10 +14,24 @@ if (isset($_SESSION['id'])) {
 }
 
 if (isset($_POST["add"])) {
+
+    if (empty($_POST["matiere"]) || empty($_POST["duree"]) || empty($_POST["note"]) || empty($_POST["date"])) {
+        die("Erreur : Tous les champs sont obligatoires !");
+    }
+
+    if (!is_numeric($_POST["note"]) || $_POST["note"] < 0 || $_POST["note"] > 10) {
+        die("Erreur : La note doit être un nombre entre 0 et 10 !");
+    }
+
+    if (!is_numeric($_POST["duree"]) || $_POST["duree"] < 0) {
+        die("Erreur : La durée doit être un nombre positif !");
+    }
+
     $matiere = $_POST["matiere"];
     $duree = $_POST["duree"];
     $note = $_POST["note"];
     $date = $_POST["date"];
+
 
     if (!is_numeric($note) || $note < 0 || $note > 10) {
         die("Erreur : La note doit être un nombre entre 0 et 10.");

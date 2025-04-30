@@ -82,7 +82,7 @@ try {
                     <td><input type="number" value="<?= $value["duree"] ?>" name="duree" ></td>
                     <td><input type="number" value="<?= $value["note_comprehension"] ?>" name="note_comprehension"></td>   
                     <td><button type="submit" name="update">update</button></td>
-                    <td><button type="submit" name="remove">remove</button></td>
+                    <td><button type="submit" name="remove" onclick="return confirm('are you sur to remove ?')">remove</button></td>
                 </form>
             </tr>
         <?php endforeach ?>

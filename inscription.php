@@ -11,8 +11,6 @@
     }
 
     if (isset($_POST["singup"])) {
-
-
         if (!empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["pass"])) {
 
             $nom = $_POST["nom"];
@@ -34,6 +32,8 @@
             ]);
             $code = "Thank you for Singup ";
             header("location: ./connexion.php");
+        }else {
+            $code = "Tous les champs sont obligatoires !";
         }
     }
 ?>
